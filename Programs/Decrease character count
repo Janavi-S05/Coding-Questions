@@ -1,0 +1,42 @@
+import java.util.*;
+/*INPUT: bacbadbad
+OUTPUT: 
+a3b3
+d2
+c1
+*/
+public class MyClass {
+    public static void get(HashMap<Character,Integer> map)
+    {
+        List<Map.Entry<Character,Integer>> l=new LinkedList<>(map.entrySet());
+        Collections.sort(l,new Comparator<Map.Entry<Character,Integer>>(){
+            public int compare(Map.Entry<Character,Integer> a,Map.Entry<Character,Integer> b)
+            {
+                return b.getValue().compareTo(a.getValue());
+            }
+        });
+        HashMap<Integer,List<Character>> temp = new LinkedHashMap<>();
+        for (Map.Entry<Character,Integer> aa : l) {
+            if(!temp.containsKey(aa.getValue())) {temp.put(aa.getValue(),new ArrayList<>());}
+            temp.get(aa.getValue()).add(aa.getKey());
+        }
+        for(Map.Entry<Integer,List<Character>> m:temp.entrySet()) 
+        {
+            Collections.sort(m.getValue());
+            for(int i=0;i<m.getValue().size();i++)
+            {
+                 System.out.print(m.getValue().get(i)+""+m.getKey());
+            }
+            System.out.println();
+        }
+    }
+    public static void main(String args[]) {
+      String s="skillrack";
+      HashMap<Character,Integer> l=new HashMap<>();
+      for(int i=0;i<s.length();i++)
+      {
+          l.put(s.charAt(i),l.getOrDefault(s.charAt(i),0)+1);
+      }
+      get(l);
+    }
+}
