@@ -1,0 +1,31 @@
+Input: aab
+Output:
+aab
+aaab
+aaaab
+aaaabb
+aaaaabb
+aaaaaabb
+aaaaaabbb
+
+
+
+import java.util.*;
+public class MyClass {
+    public static void main(String args[]) {
+        Scanner in=new Scanner(System.in);
+      StringBuilder s=new StringBuilder(in.next());
+      int i,n=s.length(),l=(n*(n-1)+1),k=0,cnt=2;
+      System.out.println(s);
+      for(i=0;i<l-1;i++)
+      {
+          if(k<n*cnt)
+          {
+              s.insert(k+1,s.charAt(k));
+              k+=cnt;
+          }
+          if(s.length()==n*cnt){ cnt++;k=0;}
+          System.out.println(s);
+      }
+    }
+}
