@@ -1,0 +1,91 @@
+Evaluating from left/right
+
+Eg:
+Input: 2+4/2*9
+       L
+Output:27
+Input: 2+4/2*9
+       R
+Output:6
+
+import java.util.*;
+public class MyClass {
+    public static StringBuilder rev(StringBuilder s)
+    {
+        StringBuilder st=new StringBuilder();
+        StringBuilder num=new StringBuilder();
+        int i;
+        for(i=s.length()-1;i>=0;i--)
+        {
+            if(!Character.isDigit(s.charAt(i)))
+            {
+                st.append(num.reverse());
+                 st.append(s.charAt(i));
+                num=new StringBuilder();
+            }
+            else if(Character.isDigit(s.charAt(i)))
+            {
+               num.append(Character.getNumericValue(s.charAt(i)));
+            }
+        }
+        st.append(num.reverse());
+        return st;
+    }
+    public static void operation(Character opr,Stack<Integer> stk,int n1,int n2)
+    {
+        if(opr=='+')
+        {
+            stk.add(n1+n2);
+        }
+        if(opr=='-')
+        {
+            stk.add(n1-n2);
+        }
+        if(opr=='*')
+        {
+            stk.add(n1*n2);
+        }
+        if(opr=='/') 
+        stk.add(n1/n2);
+    }
+    public static void main(String args[]) {
+      Scanner in=new Scanner(System.in);
+      StringBuilder s=new StringBuilder(in.next());
+      StringBuilder sb=new StringBuilder();
+      char ch=in.next().charAt(0);
+      int i=0;
+      String str="";
+      Stack<Integer> stk=new Stack<>();
+      List<Integer> op=new ArrayList<>();
+      if(ch=='R') s=rev(s);
+          String st="";
+          for(i=0;i<s.length();i++)
+          {
+              if(Character.isDigit(s.charAt(i)))
+              {
+                  st+=s.charAt(i);
+                  
+              }
+              else if(!Character.isDigit(s.charAt(i)))
+              {
+                  sb.append(s.charAt(i));
+                  op.add(i);
+                  int x=Integer.parseInt(st);
+                  stk.add(x);
+                  st="";
+              }
+              if(stk.size()==2)
+              {
+                  int n2=stk.pop(),n1=stk.pop();
+                  char opr=sb.charAt(0);
+                  sb.deleteCharAt(0);
+                  op.remove(0);
+                  operation(opr,stk,n1,n2);
+              }
+          }
+      int x=Integer.parseInt(s.substring(op.get(0)+1));
+      operation(sb.charAt(0),stk,stk.pop(),x);
+      System.out.println(stk.pop());
+      
+    }
+}
