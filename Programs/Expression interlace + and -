@@ -1,0 +1,50 @@
+Input: 5+10-20
+Output:15
+/* If the operator is '+' then subtract the two numbers 
+   else if it is '-' then add both */
+import java.util.*;
+public class MyClass {
+    public static void main(String args[]) {
+      Stack<Integer> stk=new Stack<>();
+      String s="15+10-20";
+      int i,rem=0,n=s.length();
+      String num1="",num2="";
+      char op='*';
+      for(i=0;i<n;i++)
+      {
+          if(Character.isDigit(s.charAt(i))&&op=='*')
+          {
+              num1+=s.charAt(i);
+          }
+          else if(Character.isDigit(s.charAt(i)))
+          {
+              num2+=s.charAt(i);
+          }
+              else if(op=='+'&&num1!=""&&num2!="")
+              {
+                  int x=Integer.parseInt(num1),y=Integer.parseInt(num2);
+                  num1=Integer.toString(x-y);
+                  num2="";
+              }
+              else if(op=='-'&&num1!=""&&num2!="")
+              {
+                  int x=Integer.parseInt(num1),y=Integer.parseInt(num2);
+                  num1=Integer.toString(x+y);
+                  num2="";
+              }
+          if(s.charAt(i)=='+')
+          {
+              op='+';
+          }
+          if(s.charAt(i)=='-')
+          {
+              op='-';
+          }
+      }
+      int x=Integer.parseInt(num1),y=Integer.parseInt(num2);
+      if(op=='-')
+      System.out.println(x+y);
+      else 
+      System.out.println(x-y);
+    }
+}
