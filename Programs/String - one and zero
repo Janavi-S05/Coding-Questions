@@ -1,0 +1,26 @@
+String - one and zero
+
+Input: ozneroonee
+Output: oneonezero
+
+Input: erzon
+Output:-1
+
+import java.util.*;
+public class MyClass {
+    public static void main(String args[]) {
+      String s="ozneroonee";
+      Map<Character,Integer> l=new HashMap<>();
+      int i;
+      for(i=0;i<s.length();i++)
+      {
+          l.put(s.charAt(i),l.getOrDefault(s.charAt(i),0)+1);
+      }
+      int z=l.get('z'),n=l.get('n');
+      if(l.get('o')==z+n&&l.get('e')==z+n&&l.get('r')==z)
+      {
+          System.out.println("one".repeat(n)+"zero".repeat(z));
+      }
+      else System.out.println("no");
+    }
+}
