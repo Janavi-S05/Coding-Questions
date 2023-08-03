@@ -1,0 +1,42 @@
+I/P : 
+  3
+  173 133 8783
+O/P:
+  133
+    
+I/P : 
+  6
+  10 20 30 33 67 58
+O/P:
+  58
+import java.util.*;
+public class MyClass {
+    public static void main(String args[]) {
+      Scanner in=new Scanner(System.in);
+      int n=in.nextInt(),i,a[]=new int[n];
+      for(i=0;i<n;i++)a[i]=in.nextInt();
+      for(i=0;i<n-1;i++)
+      {
+          int x=a[i],y=a[i+1],f=0;
+          while(x>y)
+          {
+              int rev=0;
+              if(f==1)
+              {
+                  int t=x;x=y;y=t;
+              }
+              while(x!=0)
+              {
+                  rev=(x%10)+(rev*10);
+                  x/=10;
+              }
+              x=rev;
+              if(x<y) System.out.println(a[i]);return;
+              else if(x>y) System.out.println(a[i+1]);return;
+              f=1;
+              x=a[i];
+          }
+      }
+      System.out.println(a[n-1]);
+    }
+}
