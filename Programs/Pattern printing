@@ -1,0 +1,55 @@
+I/P: n=8
+o/p:
+#######*#######
+######*-*######
+#####*-*-*#####
+####*-*-*-*####
+###*-*-*-*-*###
+##*-*-*-*-*-*##
+#*-*-*-*-*-*-*#
+*-*-*-*-*-*-*-*
+#*-*-*-*-*-*-*#
+##*-*-*-*-*-*##
+###*-*-*-*-*###
+####*-*-*-*####
+#####*-*-*#####
+######*-*######
+#######*#######
+
+
+import java.util.*;
+public class MyClass {
+    public static void main(String args[]) {
+        Scanner in=new Scanner(System.in);
+      int n=in.nextInt(),i,j,x=(2*n)-1;
+      for(i=0;i<x;i++)
+      {
+          for(j=0;j<x;j++)
+          {
+              if(j<n-i-1||j>=n+i||i>=n&&(i>=n+j||i+j-x>=n-1))
+              {
+                  System.out.print("#");
+              }
+              else if(j>=n-i-1||j>=x-n+i)
+              {
+                  if(i%2==0&&j%2!=0||i%2!=0&&j%2==0)
+                  {
+                      if(n%2!=0)
+                      {
+                          System.out.print("-");
+                      }
+                      else System.out.print("*");
+                  }
+                  else{
+                      if(n%2!=0)
+                      {
+                          System.out.print("*");
+                      }
+                      else System.out.print("-");
+                  }
+              }
+          }
+          System.out.println();
+      }
+    }
+}
