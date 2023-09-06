@@ -1,0 +1,27 @@
+I/P: [2,5,9,6,3,8,15,12]
+O/P: [3,6,12,8,8,12,15,12]
+
+import java.util.*;
+
+public class NextGreaterElement {
+    public static void solve(int[] arr) {
+        TreeSet<Integer> set = new TreeSet<>();
+        for (int i = arr.length - 1; i >= 0; i--) {
+            set.add(arr[i]);
+            Integer nextGreater = set.higher(arr[i]);
+            if (nextGreater == null) {
+                arr[i] = arr[i];
+            } else {
+                arr[i] = nextGreater;
+            }
+        }
+    }
+    public static void main(String[] args) {
+        int[] arr = {2,5,9,6,3,8,15,12};
+        solve(arr);
+        for (int i : arr) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+    }
+}
