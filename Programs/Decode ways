@@ -1,0 +1,33 @@
+
+Input:
+s="123"
+Output: 3
+Explanation:
+*Initilly decode 1 so remaining is 23 else take 12 and remaining is 3.
+*Next take 2 and 3 individually 
+It forms ABC(123),LC(12 3),AW(1 23)
+
+
+public class Solution
+{
+    static int mod=1000000007;
+    public static int ways(int i,String s,int dp[])
+    {
+        if(i>=s.length()) return 1;
+        if(s.charAt(i)=='0') return 0;
+        if(i==s.length()-1) return 1;
+        if(dp[i]!=-1) return dp[i];
+        if(s.charAt(i)=='1'||(s.charAt(i)=='2'&&s.charAt(i+1)>=48&&s.charAt(i+1)<=54))
+        {
+            return dp[i]=(ways(i+1,s,dp)%mod+ways(i+2,s,dp)%mod)%mod;
+        }
+        return dp[i]=ways(i+1,s,dp)%mod;
+    }
+    public static void main(String args[])
+    {
+        String str="123";
+        int dp[]=new int[str.length()];
+        for(int i=0;i<str.length();i++)dp[i]=-1;
+        return ways(0,str,dp)%mod;
+    }
+}
