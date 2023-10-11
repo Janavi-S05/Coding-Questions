@@ -1,0 +1,59 @@
+Input1:
+5
+output1:
+2
+6435 1287
+8235 1647
+
+Input2:
+4
+output2:
+2
+5472 1368
+7452 1863
+
+import java.util.*;
+public class MyClass {
+    static Set<String> l=new HashSet<>();
+    static Map<String,String> m=new TreeMap<>();
+    public static void generate(String s1,String s2)
+    {
+        if(s2.length()==0)
+        {
+            l.add(s1);return;
+        }
+        for(int i=0;i<s2.length();i++)
+        {
+            generate(s1+s2.charAt(i),s2.substring(0,i)+s2.substring(i+1)); // performs permutation
+        }
+    }
+    public static void permute(int n)
+    {
+        generate("","12345678");
+        Set<String> set=new HashSet<>();
+        for(String str:l)
+        {
+            String s1=str.substring(0,4),s2=str.substring(4);
+            int x=Integer.parseInt(s1),y=Integer.parseInt(s2);
+            if(x%y==0&&x/y==n)
+            {
+                String first=s1+" "+s2;
+                String last=s2+" "+s1;
+                if(!set.contains(first)&&!set.contains(last))
+                {
+                    m.put(s1,s2);
+                    set.add(first);set.add(last);
+                }
+            }
+        }
+    }
+    public static void main(String args[]) {
+      int n=4;
+      permute(n);
+      System.out.println(m.size());
+      for(Map.Entry<String,String> map:m.entrySet())
+      {
+          System.out.println(map.getKey()+" "+map.getValue());
+      }
+    }
+}
