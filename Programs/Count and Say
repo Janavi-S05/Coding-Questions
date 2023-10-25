@@ -1,0 +1,39 @@
+I/p= 10
+O/P
+1
+11
+21
+1211
+111221
+312211
+13112221
+1113213211
+31131211131221
+13211311123113112211
+
+public class MyClass {
+    public static void main(String args[]) {
+      int n=10,i,j;
+      String s="1";
+      System.out.println(s);
+      for(i=0;i<n-1;i++)
+      {
+          int cnt=1;
+          String st="";
+          for(j=0;j<s.length();j++)
+          {
+              if(j+1<s.length()&&s.charAt(j)==s.charAt(j+1))
+              {
+                  cnt++;
+              }
+              else 
+              {
+                  st=st+""+cnt+s.charAt(j);
+                  cnt=1;
+              }
+          }
+          System.out.println(st);
+          s=st;
+      }
+    }
+}
