@@ -1,0 +1,38 @@
+Input:
+  s="23:50"
+  x=15
+  s="08:25"
+  x=10
+Output:
+  00:05
+  08:35
+
+import java.util.*;
+class HelloWorld {
+    public static void main(String[] args) {
+        Scanner in=new Scanner(System.in);
+        String s[]=in.next().split(":");
+        int h=Integer.parseInt(s[0]),m=Integer.parseInt(s[1]);
+        int x=15;
+        while(x>=60)
+        {
+            h=(h+1)%24;
+            x-=60;
+        }
+        if(x>0)
+        {
+            m+=x;
+        }
+        if(m>=60)
+        {
+            h=(h+1)%24;
+            m-=60;
+        }
+        if(h<=9)
+        System.out.print("0");
+        System.out.print(h+":");
+        if(m<=9)
+        System.out.print("0");
+        System.out.print(m);
+    }
+}
