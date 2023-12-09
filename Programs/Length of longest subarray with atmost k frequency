@@ -1,0 +1,33 @@
+Input: nums = [1,2,3,1,2,3,1,2], k = 2
+Output: 6
+
+Input: nums = [1,2,1,2,1,2,1,2], k = 1
+Output: 2
+
+class Solution {
+    public int maxSubarrayLength(int[] nums, int k) {
+        int i=0,j=0,n=nums.length,max=0;
+        Map<Integer,Integer> l=new HashMap<>();
+        while(j<n)
+        {
+            l.put(nums[j],l.getOrDefault(nums[j],0)+1);
+            while(l.get(nums[j])>k)
+            {
+                l.put(nums[i],l.get(nums[i])-1);
+                if(l.get(nums[i])==0)
+                {
+                    l.remove(nums[i]);
+                }
+                i++;
+            }
+            max=Math.max(max,j-i+1);
+            j++;
+        }
+        return max;
+    }
+public static void main(String args[])
+{
+  int a[]={1,2,3,1,2,3,1,2},k=2;
+  System.out.println(maxSubarrayLength(a,k));
+}
+}
